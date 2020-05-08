@@ -10,6 +10,7 @@ import DashboardIndexPage from './Dashboard';
 import ProductIndexPage from './Product';
 import SamplePage from './Sample';
 import UserIndexPage from './Users';
+import SupplierIndexPage from './Supplier';
 
 export const ScrollTopContext = React.createContext<Function>(() => {});
 
@@ -50,6 +51,12 @@ const AdminPage = memo((props: {}) => {
       // role: enRoles.admin,
       icon: AccountMultipleIcon
     },
+    {
+      path: '/supplier',
+      display: 'Supplier',
+      // role: enRoles.admin,
+      icon: AccountMultipleIcon
+    },
     { path: '/exemplos', display: 'Exemplos', icon: StarIcon }
   ]);
 
@@ -65,6 +72,7 @@ const AdminPage = memo((props: {}) => {
               <Route path='/exemplos' component={SamplePage} />
               <Route path='/usuarios' component={UserIndexPage} />
               <Route path='/produtos' component={ProductIndexPage} />
+              <Route path='/supplier' component={SupplierIndexPage} />
               <Route path='/' component={DashboardIndexPage} />
               <Route render={renderRedirect} />
             </Switch>
