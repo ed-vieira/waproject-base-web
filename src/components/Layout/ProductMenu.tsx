@@ -10,9 +10,9 @@ import LightIcon from 'mdi-react/Brightness5Icon';
 import ExitToAppIcon from 'mdi-react/ExitToAppIcon';
 import KeyVariantIcon from 'mdi-react/KeyVariantIcon';
 import React, { memo, useCallback, useContext } from 'react';
-import { useCallbackObservable, useObservable } from 'react-use-observable';
+import { useCallbackObservable } from 'react-use-observable';
 import { of } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import authService from 'services/auth';
 
 const useStyles = makeStyles(theme => ({
@@ -32,15 +32,6 @@ const ProductMenu = memo((props: {}) => {
   const classes = useStyles(props);
   const themeContext = useContext(ThemeContext);
 
-  const [product] = useObservable(() => {
-    return authService.getProduct().pipe(
-      map(product => ({
-        avatar: null,
-        avatarLetters: `${product.nome?.substr(0, 1) ?? ''} ${product.cod?.substr(0, 1) ?? ''}`.trim() || 'U'
-      })),
-      logError()
-    );
-  }, []);
 
   const handleChangePassword = useCallback(() => authService.openChangePassword(), []);
 
@@ -51,14 +42,12 @@ const ProductMenu = memo((props: {}) => {
     );
   }, []);
 
-  if (!product) {
-    return null;
-  }
+
 
   return (
     <DropdownMenu anchorOrigin={{ vertical: 35, horizontal: 'right' }}>
       <IconButton color='inherit' className={classes.button}>
-        <Avatar className={classes.avatar}>{product.avatarLetters}</Avatar>
+        <Avatar className={classes.avatar}>avatar produtos</Avatar>
       </IconButton>
       <OptionItem
         text={themeContext.currentTheme === 'light' ? 'Tema Escuro' : 'Tema Claro'}

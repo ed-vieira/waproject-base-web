@@ -16,7 +16,7 @@ import TableCellSortable from 'components/Shared/Pagination/TableCellSortable';
 import TablePagination from 'components/Shared/Pagination/TablePagination';
 import TableWrapper from 'components/Shared/TableWrapper';
 import usePaginationObservable from 'hooks/usePagination';
-import IProduct from 'interfaces/models/product';
+import {IProduct} from 'interfaces/models/product';
 import RefreshIcon from 'mdi-react/RefreshIcon';
 import React, { Fragment, memo, useCallback, useState } from 'react';
 import productService from 'services/product';
@@ -47,7 +47,7 @@ const ProductListPage = memo(() => {
   const formCallback = useCallback(
     (product?: IProduct) => {
       setFormOpened(false);
-      current ? refresh() : mergeParams({ term: product.price });
+      current ? refresh() : mergeParams({ term: String(product.price) });
     },
     [current, mergeParams, refresh]
   );
@@ -84,14 +84,20 @@ const ProductListPage = memo(() => {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCellSortable paginationParams={params} disabled={loading} onChange={mergeParams} column='product'>
+                <TableCellSortable paginationParams={params} disabled={loading} onChange={mergeParams} column='name'>
                   Produto
                 </TableCellSortable>
-                <TableCellSortable paginationParams={params} disabled={loading} onChange={mergeParams} column='quant'>
+                <TableCellSortable paginationParams={params} disabled={loading} onChange={mergeParams} column='portion'>
                   Porção
                 </TableCellSortable>
-                <TableCellSortable paginationParams={params} disabled={loading} onChange={mergeParams} column='cod'>
+                <TableCellSortable paginationParams={params} disabled={loading} onChange={mergeParams} column='sku'>
                   Código
+                </TableCellSortable>
+                <TableCellSortable paginationParams={params} disabled={loading} onChange={mergeParams} column='category'>
+                  Categoria
+                </TableCellSortable>
+                <TableCellSortable paginationParams={params} disabled={loading} onChange={mergeParams} column='status'>
+                  Status
                 </TableCellSortable>
                 <TableCellSortable paginationParams={params} disabled={loading} onChange={mergeParams} column='price'>
                   Preços

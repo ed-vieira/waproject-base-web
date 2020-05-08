@@ -11,7 +11,7 @@ import TextField from 'components/Shared/Fields/Text';
 import Toast from 'components/Shared/Toast';
 import { logError } from 'helpers/rxjs-operators/logError';
 import { useFormikObservable } from 'hooks/useFormikObservable';
-import IProduct from 'interfaces/models/product';
+import { IProduct } from 'interfaces/models/product';
 import React, { forwardRef, memo, useCallback } from 'react';
 import { tap } from 'rxjs/operators';
 import productService from 'services/product';
@@ -50,7 +50,7 @@ const FormDialog = memo((props: IProps) => {
     onSubmit(model) {
       return productService.save(model).pipe(
         tap(product => {
-          Toast.show(`${product.name} foi salvo${model.id ? '' : ', um email foi enviado com a senha'}`);
+          Toast.show(`${product.name} foi salvo${model.id ? '' : ', um produto foi enviado'}`);
           props.onComplete(product);
         }),
         logError(true)
@@ -82,16 +82,22 @@ const FormDialog = memo((props: IProps) => {
         <DialogContent className={classes.content}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
-              <TextField label='Nome' name='nome' formik={formik} />
+              <TextField label='name' name='name' formik={formik} />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField label='Quantidade' name='quant' formik={formik} />
+              <TextField label='portion' name='portion' formik={formik} />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField label='Codigo' name='cod' formik={formik} />
+              <TextField label='sku' name='sku' formik={formik} />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField label='Preco' name='price' formik={formik} />
+              <TextField label='status' name='status' formik={formik} />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField label='category' name='category' formik={formik} />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField label='price' name='price' formik={formik} />
             </Grid>
           </Grid>
         </DialogContent>

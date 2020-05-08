@@ -1,4 +1,4 @@
-import IProduct from 'interfaces/models/product';
+import {IProduct} from 'interfaces/models/product';
 import { IPaginationParams, IPaginationResponse } from 'interfaces/pagination';
 import { Observable } from 'rxjs';
 
