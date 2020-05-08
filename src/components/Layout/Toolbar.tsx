@@ -9,13 +9,14 @@ import MenuIcon from 'mdi-react/MenuIcon';
 import React, { memo, Props, useCallback, useContext } from 'react';
 
 import { DrawerContext } from './Drawer/context';
+import ProductMenu from './ProductMenu';
 import UserMenu from './UserMenu';
 
 interface IProps extends Props<{}> {
   title?: string;
 }
 
-const useStyle = makeStyles(theme => ({
+const useStyle = makeStyles((theme: any) => ({
   root: {
     height: theme.variables.headerHeight,
     marginTop: theme.variables.contentPadding * -1,
@@ -76,6 +77,7 @@ const Toolbar = memo((props: IProps) => {
               </Grid>
               <Grid item xs={false}>
                 <UserMenu />
+                <ProductMenu />
               </Grid>
             </Grid>
           )}
