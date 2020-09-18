@@ -24,12 +24,6 @@
     "docker:push:staging": "docker push waproject/waproject-base-web:staging",
     "deploy-server": "scripts/deploy-server.sh"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "concurrently -r \"yarn lint\" \"yarn tsc --noEmit\"",
-      "post-merge": "yarn"
-    }
-  },
   "dependencies": {
     "@material-ui/core": "4.9.11",
     "@material-ui/icons": "4.9.1",
